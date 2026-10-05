@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Trò chơi Động từ</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#bdefff,#ffffff);
+    text-align:center;
+}
+
+.container{
+    width:600px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 0 15px #aaa;
+}
+
+h1{
+    color:#e91e63;
+    font-size:40px;
+}
+
+.word{
+    font-size:50px;
+    color:#1565c0;
+    font-weight:bold;
+    margin:30px;
+}
+
+button{
+    padding:15px 35px;
+    margin:10px;
+    font-size:22px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+}
+
+.yes{
+    background:#4caf50;
+    color:white;
+}
+
+.no{
+    background:#f44336;
+    color:white;
+}
+
+#result{
+    font-size:25px;
+    margin:20px;
+}
+
+.score{
+    font-size:25px;
+    color:#ff9800;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<h1>🎯 SĂN TÌM ĐỘNG TỪ</h1>
+
+<p>
+Hãy chọn xem từ dưới đây có phải là <b>ĐỘNG TỪ</b> không nhé!
+</p>
+
+
+<div class="word" id="word">
+chạy
+</div>
+
+
+<button class="yes" onclick="check(true)">
+✅ Đúng
+</button>
+
+<button class="no" onclick="check(false)">
+❌ Sai
+</button>
+
+
+<div id="result"></div>
+
+<div class="score">
+⭐ Điểm: <span id="score">0</span>
+</div>
+
+
+<button onclick="restart()">
+🔄 Chơi lại
+</button>
+
+
+</div>
+
+
+<script>
+
+let questions=[
+{word:"chạy",answer:true},
+{word:"bay",answer:true},
+{word:"bơi",answer:true},
+{word:"xanh",answer:false},
+{word:"cười",answer:true},
+{word:"bàn",answer:false},
+{word:"nói",answer:true},
+{word:"đẹp",answer:false},
+{word:"ngủ",answer:true},
+{word:"hoa",answer:false},
+{word:"đi",answer:true},
+{word:"vui",answer:false}
+];
+
+
+let index=0;
+let score=0;
+
+
+function showWord(){
+
+document.getElementById("word").innerHTML=
+questions[index].word;
+
+document.getElementById("result").innerHTML="";
+
+}
+
+
+function check(choice){
+
+if(choice==questions[index].answer){
+
+document.getElementById("result").innerHTML=
+"🎉 Chính xác!";
+
+score++;
+
+}else{
+
+document.getElementById("result").innerHTML=
+"😊 Chưa đúng, thử lại nhé!";
+
+}
+
+
+document.getElementById("score").innerHTML=score;
+
+
+index++;
+
+if(index>=questions.length){
+
+setTimeout(function(){
+
+document.getElementById("word").innerHTML=
+"🏆 Hoàn thành!";
+
+document.getElementById("result").innerHTML=
+"Bạn được "+score+"/"+questions.length+" điểm";
+
+},1000);
+
+}else{
+
+setTimeout(showWord,1000);
+
+}
+
+}
+
+
+
+function restart(){
+
+index=0;
+score=0;
+
+document.getElementById("score").innerHTML=0;
+
+showWord();
+
+}
+
+
+showWord();
+
+
+</script>
+
+
+</body>
+</html>
